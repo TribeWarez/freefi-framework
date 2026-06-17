@@ -1,0 +1,15 @@
+{
+  "page_title": "Tribe Hub Pi",
+  "ap_ssid": "TribeHub-Pi",
+  "ap_pass": "",
+  "ap_ip": "192.168.4.1",
+  "http_port": 8080,
+  "tor_socks_port": 9050,
+  "tor_guest_proxy": true,
+  "privacy_redact": true,
+  "oled_enabled": false,
+  "oled_i2c_port": 1,
+  "ap_iface": "wlan0",
+  "scan_iface": "",
+  "uplink_iface": "eth0"
+}

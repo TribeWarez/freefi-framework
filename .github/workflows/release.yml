@@ -1,0 +1,75 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env:
+          - esp32dev
+          - zy_esp32
+          - heltec_wifi_kit_32
+          - esp8266_az
+          - esp32_uno_lcd_id
+          - esp32_uno_tft_id
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: pip install platformio
+
+      - name: Build ${{ matrix.env }}
+        run: pio run -e ${{ matrix.env }}
+
+      - name: Rename and upload firmware
+        run: |
+          TAG=${GITHUB_REF_NAME}
+          cp .pio/build/${{ matrix.env }}/firmware.bin firmware-${{ matrix.env }}-${TAG}.bin
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: firmware-${{ matrix.env }}-*
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  checksums:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Generate checksums
+        run: |
+          find artifacts -name 'firmware-*' -exec sha256sum {} \; > checksums-${{ github.ref_name }}.txt
+          cat checksums-${{ github.ref_name }}.txt
+
+      - name: Upload checksums
+        uses: softprops/action-gh-release@v2
+        with:
+          files: checksums-${{ github.ref_name }}.txt
+          tag_name: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

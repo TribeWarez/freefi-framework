@@ -1,0 +1,7 @@
+# Append to /etc/tor/torrc (install.sh merges)
+SOCKSPort 9050
+AutomapHostsOnResolve 1
+# Transparent proxy for AP guests (tor-guest.sh)
+TransPort 9040
+DNSPort 5353
+VirtualAddrNetworkIPv4 10.192.0.0/10

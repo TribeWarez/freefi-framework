@@ -1,0 +1,4 @@
+flask>=2.3,<4
+luma.oled>=2.14
+luma.core>=2.4
+Pillow>=9.0

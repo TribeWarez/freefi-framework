@@ -1,0 +1,17 @@
+[Unit]
+Description=TribeWarez Pi hub (HTTP UI + mesh beacon + OLED)
+After=network-online.target tor.service hostapd.service dnsmasq.service
+Wants=tor.service
+
+[Service]
+Type=simple
+Environment=TRIBE_CONF_DIR=/etc/tribe-node
+Environment=TRIBE_DATA_DIR=/var/lib/tribe-node
+WorkingDirectory=/opt/tribe-node/pi
+Environment=PYTHONPATH=/opt/tribe-node/pi
+ExecStart=/usr/bin/python3 -m tribe_node
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

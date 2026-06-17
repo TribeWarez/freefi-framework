@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ page_title }}</title>
+<link rel="icon" href="/favicon.ico" type="image/svg+xml">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:system-ui,sans-serif;background:#0d0612;color:#f60}
+.explorer-content{max-width:42rem;margin:0 auto;padding:1.5rem 1rem 2rem}
+.page-hero{text-align:center;border-bottom:1px solid #630;padding-bottom:1rem;margin-bottom:1rem}
+.page-hero h1{margin:0;color:#f60}
+.explorer-card{border:1px solid #630;border-radius:.75rem;background:#1a0d24;padding:1.25rem;text-align:center}
+.explorer-card p{color:#c90}
+.explorer-card code{color:#93f}
+.nav-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:1rem}
+.nav-links a{color:#94f;text-decoration:none;border:1px solid #630;padding:.35rem .65rem;font-family:monospace;font-size:.8rem}
+.tribe-links{text-align:center;margin:1rem 0;font-family:monospace;font-size:.75rem}
+.tribe-links a{color:#94f;margin:0 .35rem}
+.tor-banner{background:#120818;border:1px solid #630;padding:.5rem;margin:.5rem 0;font-size:.85rem;color:#93f}
+.chat-log{height:14rem;overflow-y:auto;text-align:left;font-family:monospace;font-size:.75rem;
+  border:1px solid #630;padding:.5rem;background:#0d0612;color:#c90}
+.node-map{display:block;margin:1rem auto;border:1px solid #630;border-radius:50%;background:#0d0612}
+</style>
+</head>
+<body>
+<div class="explorer-content">
+<header class="page-hero">
+<h1>{{ page_title }}</h1>
+<p class="sub">AP <code>{{ ap_ssid }}</code> · Pi hub · Tor proxy for guests</p>
+</header>
+<main class="explorer-card">
+{{ body|safe }}
+</main>
+<nav class="nav-links">
+<a href="/">Status</a>
+<a href="/chat">IRC</a>
+<a href="/map">Node map</a>
+<a href="/tor">Tor info</a>
+</nav>
+<nav class="tribe-links">
+<a href="https://mystic.tribewarez.com" target="_blank" rel="noopener">mystic.tribewarez.com</a> ·
+<a href="https://defi.tribewarez.com" target="_blank" rel="noopener">defi.tribewarez.com</a> ·
+<a href="https://docs.tribewarez.com" target="_blank" rel="noopener">docs.tribewarez.com</a>
+</nav>
+<p style="text-align:center;font-size:.7rem;color:#630">Tribe mesh — ESP8266/32/D1 nodes join this AP or share uplink</p>
+</div>
+</body>
+</html>
